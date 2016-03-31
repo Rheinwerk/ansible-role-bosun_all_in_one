@@ -1,0 +1,8 @@
+description "Bosun"
+start on filesystem and started docker
+stop on runlevel [!2345]
+respawn
+script
+  cd {{ _bosun.data_directories.base }}/{{ _bosun.data_directories.docker }}
+  /usr/local/bin/docker-compose start
+end script

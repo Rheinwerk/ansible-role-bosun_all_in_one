@@ -1,0 +1,23 @@
+---
+_docker_install:
+  update_docker_package: "{{ RW_APT_CACHE_UPDATE|default('no') }}"
+  docker_pkg_name: docker-engine
+
+_bosun:
+  use_default_config: yes
+  version: 0.5.0-rc2
+  data_directories:
+    config: /etc/bosun
+    base: /opt/bosun
+    data: data
+    data_hbase: data/hbase-root
+    data_bosun: data/bosun
+    docker: bosun
+  network:
+    bosun:
+      expose_to_devices:
+        - 127.0.0.1
+    opentsdb:
+      expose_to_devices:
+        - 127.0.0.1
+

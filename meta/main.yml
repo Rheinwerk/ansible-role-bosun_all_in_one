@@ -1,0 +1,17 @@
+galaxy_info:
+  author: Lukas Pustina
+  description: Installs Bosun with OpenTSDB as Docker Containers
+  company: Rheinwerk
+  license: license (GPLv3)
+  min_ansible_version: 2.0
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+  galaxy_tags:
+    - bosun
+    - opentsdb
+    - system
+dependencies:
+  - { role: docker_install, _docker_install: _docker_install }
+

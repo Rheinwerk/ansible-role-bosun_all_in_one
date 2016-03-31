@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  connection: local
+  become: Yes
+  vars:
+    RW_APT_CACHE_UPDATE: yes
+    RW_ENABLE_DOWNLOADS: yes
+  roles:
+    - ansible-role-bosun_all_in_one

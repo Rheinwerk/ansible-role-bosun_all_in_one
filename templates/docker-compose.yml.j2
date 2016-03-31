@@ -1,0 +1,30 @@
+version: '2'
+services:
+  opentsdb:
+    image: rheinwerk/opentsdb:opentsdb-2.2
+    ports:
+{% if _bosun.network.opentsdb.expose_to_devices|length > 0 %}
+{% for dev in _bosun.network.opentsdb.expose_to_devices %}
+      - "{{ dev }}:4242:4242"
+{% endfor %}
+{% else %}
+      - "4242:4242"
+{% endif %}
+    volumes:
+      - {{ _bosun.data_directories.base }}/{{ _bosun.data_directories.data_hbase }}:/data/hbase:rw
+  bosun:
+    image: rheinwerk/bosun:{{ _bosun.version }}
+    depends_on:
+      - opentsdb
+    ports:
+{% if _bosun.network.bosun.expose_to_devices|length > 0 %}
+{% for dev in _bosun.network.bosun.expose_to_devices %}
+      - "{{ dev }}:8070:8070"
+{% endfor %}
+{% else %}
+      - "8070:8070"
+{% endif %}
+    volumes:
+      - {{ _bosun.data_directories.config }}:/etc/bosun:ro
+      - {{ _bosun.data_directories.base }}/{{ _bosun.data_directories.data_bosun }}:/var/run/bosun:rw
+
