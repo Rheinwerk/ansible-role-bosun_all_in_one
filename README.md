@@ -1,38 +1,54 @@
-Role Name
-=========
+Bosun
+=====
 
-A brief description of the role goes here.
+This role installs a self sufficient Bosun instance including OpenTSDB
+using Docker Containers.
+
+[![Build Status](https://travis-ci.org/Rheinwerk/ansible-role-bosun_all_in_one.svg?branch=master)](https://travis-ci.org/Rheinwerk/ansible-role-bosun_all_in_one)
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+This role requires [`docker_ubuntu`](https://galaxy.ansible.com/detail#/role/292) renamed to `docker_install`. You can do this using a requirements file for `ansible-galaxy` like this:
+
+```
+- src: angstwad.docker_ubuntu
+  name: docker_install
+  version: 1.1.3
+```
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+There are three variables that drive this role: `_bosun`, `RW_APT_CACHE_UPDATE`, and `RW_ENABLE_DOWNLOADS`. `_bosun` is a map that contains all configuration and settings for this role. `RW_APT_CACHE_UPDATE` `RW_ENABLE_DOWNLOADS` may be specified as _extra variables_ on invocation of Ansible in order to force `apt-get update` or download assets from the Internet, respectively. Please see `defaults/main.yml` for details.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+Docker installation via `docker_ubuntu`. See requirements.
 
 Example Playbook
 ----------------
 
+The general contract of this role is to take the variables map `_bosun` from `defaults/main.yml` as a template for your configuration and pass that configuration as a parameter to this role.
+
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
     - hosts: servers
+      var:
+        DOCKER:
+          ...
+        BOSUN:
+          ...
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: bosun, tags: [ 'bosun' ], _docker_install: "{{ DOCKER }}", _bosun: "{{ BOSUN}}" }
 
 License
 -------
 
-BSD
+Please see LICENSE.
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Original author is [Lukas Pustina](https://github.com/lukaspustina) as member of the [Rheinwerk](https://github.com/Rheinwerk) project.

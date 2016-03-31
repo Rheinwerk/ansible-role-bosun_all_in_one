@@ -5,6 +5,7 @@ _docker_install:
 
 _bosun:
   use_default_config: yes
+  instance: bosun
   version: 0.5.0-rc2
   data_directories:
     config: /etc/bosun

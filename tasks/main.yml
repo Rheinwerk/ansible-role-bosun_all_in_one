@@ -10,7 +10,7 @@
     - "{{ _bosun.data_directories.base }}/{{ _bosun.data_directories.docker }}"
 
 - name: Create Bosun Upstart File
-  template: src=etc/init/bosun.conf.j2 dest=/etc/init/bosun.conf owner=root group=root mode=0755
+  template: src=etc/init/bosun.conf.j2 dest=/etc/init/{{ _bosun.instance }}.conf owner=root group=root mode=0755
 
 - name: Enable Bosun
   service: name=bosun enabled=yes
@@ -27,7 +27,7 @@
   command: docker-compose pull
   args:
     chdir: "{{ _bosun.data_directories.base }}/{{ _bosun.data_directories.docker }}"
-  when: "{{ RW_ENABLE_DOWNLOADS }}"
+  when: "{{ RW_ENABLE_DOWNLOADS is defined }}"
 
 # While https://github.com/docker/compose/issues/2908 is unsolved, we can make this sane
 ##- name: Create Containers

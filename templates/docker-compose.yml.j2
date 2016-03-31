@@ -5,7 +5,7 @@ services:
     ports:
 {% if _bosun.network.opentsdb.expose_to_devices|length > 0 %}
 {% for dev in _bosun.network.opentsdb.expose_to_devices %}
-      - "{{ dev }}:4242:4242"
+      - "{{ dev }}:4242"
 {% endfor %}
 {% else %}
       - "4242:4242"
@@ -19,7 +19,7 @@ services:
     ports:
 {% if _bosun.network.bosun.expose_to_devices|length > 0 %}
 {% for dev in _bosun.network.bosun.expose_to_devices %}
-      - "{{ dev }}:8070:8070"
+      - "{{ dev }}:8070"
 {% endfor %}
 {% else %}
       - "8070:8070"
