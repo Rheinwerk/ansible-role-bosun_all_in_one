@@ -13,5 +13,5 @@ galaxy_info:
     - opentsdb
     - system
 dependencies:
-  - { role: docker_install, docker_pkg_name: "{{ _docker_install.docker_pkg_name }}", update_docker_package: "{{ _docker_install.update_docker_package }}", docker_opts: "--bip={{ _docker_install.bip }}" }
+  - { role: docker_install, docker_pkg_name: "{{ _docker_install.docker_pkg_name }}", update_docker_package: "{{ _docker_install.update_docker_package }}", docker_opts: "{{ _docker_install.docker_opts }}" }
 
