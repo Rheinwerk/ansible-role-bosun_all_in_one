@@ -2,6 +2,7 @@
 _docker_install:
   update_docker_package: "{{ RW_APT_CACHE_UPDATE|default('no') }}"
   docker_pkg_name: docker-engine
+  docker_opts:
 
 _bosun:
   use_default_config: yes
@@ -17,8 +18,8 @@ _bosun:
   network:
     bosun:
       expose_to_devices:
-        - 127.0.0.1
+        - "127.0.0.1:8070"
     opentsdb:
       expose_to_devices:
-        - 127.0.0.1
+        - "127.0.0.1:4242"
 
