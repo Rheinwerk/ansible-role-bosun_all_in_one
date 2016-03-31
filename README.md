@@ -9,13 +9,7 @@ using Docker Containers.
 Requirements
 ------------
 
-This role requires [`docker_ubuntu`](https://galaxy.ansible.com/detail#/role/292) renamed to `docker_install`. You can do this using a requirements file for `ansible-galaxy` like this:
-
-```
-- src: angstwad.docker_ubuntu
-  name: docker_install
-  version: 1.1.3
-```
+None.
 
 Role Variables
 --------------
@@ -25,7 +19,7 @@ There are three variables that drive this role: `_bosun`, `RW_APT_CACHE_UPDATE`,
 Dependencies
 ------------
 
-Docker installation via `docker_ubuntu`. See requirements.
+This role requires [`docker_ubuntu`](https://galaxy.ansible.com/detail#/role/292).
 
 Example Playbook
 ----------------
