@@ -12,7 +12,7 @@ _bosun:
     config: /etc/bosun
     base: /opt/bosun
     data: data
-    data_hbase: data/hbase-root
+    data_hbase: data/hbase
     data_bosun: data/bosun
     docker: bosun
   network:
