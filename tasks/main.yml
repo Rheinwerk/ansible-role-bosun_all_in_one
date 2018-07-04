@@ -46,4 +46,3 @@
   args:
     chdir: "{{ _bosun.data_directories.base }}/{{ _bosun.data_directories.docker }}"
   when: "{{ _bosun.use_default_config }}"
-
