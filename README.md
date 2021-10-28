@@ -4,7 +4,7 @@ Bosun
 This role installs a self sufficient Bosun instance including OpenTSDB
 using Docker Containers.
 
-[![Build Status](https://travis-ci.org/Rheinwerk/ansible-role-bosun_all_in_one.svg?branch=master)](https://travis-ci.org/Rheinwerk/ansible-role-bosun_all_in_one)
+[![Build Status](https://github.com/Rheinwerk/ansible-role-bosun_all_in_one/actions/workflows/ci.yml/badge.svg)](https://github.com/Rheinwerk/ansible-role-bosun_all_in_one/actions/workflows/ci.yml)
 
 Requirements
 ------------
