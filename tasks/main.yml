@@ -1,6 +1,11 @@
 ---
 - name: Create Bosun Data Directories
-  file: path={{ item }} state=directory owner=root group=root mode=0755
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
   with_items:
     - "{{ _bosun.data_directories.config }}"
     - "{{ _bosun.data_directories.base }}"
@@ -10,24 +15,41 @@
     - "{{ _bosun.data_directories.base }}/{{ _bosun.data_directories.docker }}"
 
 - name: Create Bosun Upstart File
-  template: src=etc/init/bosun.conf.j2 dest=/etc/init/{{ _bosun.instance }}.conf owner=root group=root mode=0755
+  template:
+    src: etc/init/bosun.conf.j2
+    dest: '/etc/init/{{ _bosun.instance }}.conf'
+    owner: root
+    group: root
+    mode: 0755
 
 - name: Enable Bosun
-  service: name=bosun enabled=yes
+  service:
+    name: bosun
+    enabled: yes
 
 - name: Create Docker Compose File
-  template: src=docker-compose.yml.j2 dest={{ _bosun.data_directories.base }}/{{ _bosun.data_directories.docker }}/docker-compose.yml owner=root group=root mode=0644
+  template:
+    src: docker-compose.yml.j2
+    dest: '{{ _bosun.data_directories.base }}/{{ _bosun.data_directories.docker }}/docker-compose.yml'
+    owner: root
+    group: root
+    mode: 0644
 
 - name: Create Bosun Configuration File
-  copy: src=etc/bosun/bosun.conf dest={{ _bosun.data_directories.config }}/bosun.conf owner=root group=root mode=0640
+  copy:
+    src: etc/bosun/bosun.conf
+    dest: '{{ _bosun.data_directories.config }}/bosun.conf'
+    owner: root
+    group: root
+    mode: 0640
   register: bosun_conf
-  when: "{{ _bosun.use_default_config }}"
+  when: _bosun.use_default_config
 
 - name: Pull Images
   command: docker-compose pull
   args:
     chdir: "{{ _bosun.data_directories.base }}/{{ _bosun.data_directories.docker }}"
-  when: "{{ RW_ENABLE_DOWNLOADS is defined }}"
+  when: RW_ENABLE_DOWNLOADS is defined
 
 # While https://github.com/docker/compose/issues/2908 is unsolved, we can make this sane
 ##- name: Create Containers
@@ -45,4 +67,4 @@
   command: docker-compose up -d
   args:
     chdir: "{{ _bosun.data_directories.base }}/{{ _bosun.data_directories.docker }}"
-  when: "{{ _bosun.use_default_config }}"
+  when: _bosun.use_default_config

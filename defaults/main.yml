@@ -1,6 +1,6 @@
 ---
 _docker_install:
-  update_docker_package: "{{ RW_APT_CACHE_UPDATE|default('no') }}"
+  update_docker_package: "{{ RW_APT_CACHE_UPDATE | default('no') }}"
   docker_pkg_name: docker-engine
   docker_opts:
 
