@@ -1,0 +1,9 @@
+---
+warn_list:
+  - name[casing]
+  - role-name
+  - yaml[truthy]
+
+# Ansible > 2.10
+skip_list:
+  - fqcn[action-core]
